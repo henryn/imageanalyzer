@@ -11,8 +11,8 @@ Storage-triggered Cloud Function.
 
 1. In the cloud shell command line, clone this repository.
 
-        git clone https://github.com/GoogleCloudPlatform/nodejs-docs-samples.git
-        cd nodejs-docs-samples/functions/imagemagick
+        git clone https://github.com/henryn/imageanalyzer.git
+        cd imageanalyzer
 
 2. Create a cloud storage bucket. This storage bucket is used to upload images for the function to check.  Replace YOUR_BUCKET_NAME with the name of the bucket.  Bucket names must be globally unique, so you may want to use your project id as your bucket name.
 
