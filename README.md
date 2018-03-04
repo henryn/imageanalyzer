@@ -1,47 +1,39 @@
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# Google Cloud Functions ImageMagick sample
+# Google Cloud Functions Analyze Image Example
 
-This sample shows you how to blur an image using ImageMagick in a
+This sample shows you how to analyze an image for inappropriate content in a
 Storage-triggered Cloud Function.
 
-View the [source code][code].
-
-[code]: index.js
 
 ## Deploy and Test
 
-1. Follow the [Cloud Functions quickstart guide][quickstart] to setup Cloud
-Functions for your project.
 
-1. Clone this repository:
+1. In the cloud shell command line, clone this repository.
 
         git clone https://github.com/GoogleCloudPlatform/nodejs-docs-samples.git
         cd nodejs-docs-samples/functions/imagemagick
 
-1. Create a Cloud Storage Bucket:
+2. Create a cloud storage bucket. This storage bucket is used to upload images for the function to check.  Replace YOUR_BUCKET_NAME with the name of the bucket.  Bucket names must be globally unique, so you may want to use your project id as your bucket name.
 
         gsutil mb gs://YOUR_BUCKET_NAME
 
-    This storage bucket is used to upload images for the function to check.
-
-1. Deploy the `blurOffensiveImages` function with a Storage trigger:
+3. Deploy the blurOffensiveImages function with a Storage trigger.  Replace YOUR_BUCKET_NAME with the name of the bucket you created in the previous step.  This may take up to 5 minutes for the code to be deployed.
 
         gcloud beta functions deploy blurOffensiveImages --trigger-bucket=YOUR_BUCKET_NAME
 
-    * Replace `YOUR_BUCKET_NAME` with the name of the Cloud Storage Bucket you created earlier.
+4. Upload an offensive image to the Storage bucket, such as this image of a flesh-eating zombie: 
 
-1.  Upload an offensive image to the Storage bucket, such as this image of
-    a flesh-eating zombie: https://cdn.pixabay.com/photo/2015/09/21/14/24/zombie-949916_1280.jpg
+        gsutil cp zombie-949916_1280.jpg gs://YOUR_BUCKET_NAME
 
-1.  Check the logs for the `blurOffensiveImages` function:
+5. Check the logs for the blurOffensiveImages function:
 
-        gcloud beta functions get-logs blurOffensiveImages
+        gcloud beta functions logs read blurOffensiveImages
 
-    You should see something like this in your console:
+You should see something like this in your console:
 
-        D      ... User function triggered, starting execution
-        I      ... `The image zombie.jpg has been detected as inappropriate.`
-        D      ... Execution took 1 ms, user function completed successfully
+        blurOffensiveImages  ...  Adult: VERY_UNLIKELY
+        blurOffensiveImages  ...  Spoof: VERY_UNLIKELY
+        blurOffensiveImages  ...  Medical: VERY_UNLIKELY
+        blurOffensiveImages  ...  Violence: VERY_LIKELY
 
-[quickstart]: https://cloud.google.com/functions/quickstart
