@@ -18,7 +18,7 @@ Storage-triggered Cloud Function.
 
         gsutil mb gs://YOUR_BUCKET_NAME
 
-3. Deploy the blurOffensiveImages function with a Storage trigger.  Replace YOUR_BUCKET_NAME with the name of the bucket you created in the previous step.  This may take up to 5 minutes for the code to be deployed.
+3. Deploy the AnalyzeImage function with a Storage trigger.  Replace YOUR_BUCKET_NAME with the name of the bucket you created in the previous step.  This may take up to 5 minutes for the code to be deployed.
 
         gcloud beta functions deploy AnalyzeImage --trigger-bucket=YOUR_BUCKET_NAME
 
@@ -26,14 +26,14 @@ Storage-triggered Cloud Function.
 
         gsutil cp zombie-949916_1280.jpg gs://YOUR_BUCKET_NAME
 
-5. Check the logs for the blurOffensiveImages function:
+5. Check the logs for the AnalyzeImage function:
 
         gcloud beta functions logs read AnalyzeImage
 
 You should see something like this in your console:
 
-        blurOffensiveImages  ...  Adult: VERY_UNLIKELY
-        blurOffensiveImages  ...  Spoof: VERY_UNLIKELY
-        blurOffensiveImages  ...  Medical: VERY_UNLIKELY
-        blurOffensiveImages  ...  Violence: VERY_LIKELY
+        AnalyzeImage  ...  Adult: VERY_UNLIKELY
+        AnalyzeImage  ...  Spoof: VERY_UNLIKELY
+        AnalyzeImage  ...  Medical: VERY_UNLIKELY
+        AnalyzeImage  ...  Violence: VERY_LIKELY
 
