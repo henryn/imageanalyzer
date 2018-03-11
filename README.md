@@ -20,7 +20,7 @@ Storage-triggered Cloud Function.
 
 3. Deploy the blurOffensiveImages function with a Storage trigger.  Replace YOUR_BUCKET_NAME with the name of the bucket you created in the previous step.  This may take up to 5 minutes for the code to be deployed.
 
-        gcloud beta functions deploy blurOffensiveImages --trigger-bucket=YOUR_BUCKET_NAME
+        gcloud beta functions deploy AnalyzeImage --trigger-bucket=gs://YOUR_BUCKET_NAME
 
 4. Upload an offensive image to the Storage bucket, such as this image of a flesh-eating zombie: 
 
@@ -28,7 +28,7 @@ Storage-triggered Cloud Function.
 
 5. Check the logs for the blurOffensiveImages function:
 
-        gcloud beta functions logs read blurOffensiveImages
+        gcloud beta functions logs read AnalyzeImage
 
 You should see something like this in your console:
 
