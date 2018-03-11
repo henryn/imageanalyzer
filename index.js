@@ -24,9 +24,7 @@ const vision = require('@google-cloud/vision');
 const client = new vision.ImageAnnotatorClient();
 // [END functions_imagemagick_setup]
 
-// [START functions_imagemagick_analyze]
-// Blurs uploaded images that are flagged as Adult or Violence.
-exports.blurOffensiveImages = (event) => {
+exports.AnalyzeImage = (event) => {
   const object = event.data;
 
   // Exit if this is a deletion or a deploy event.
@@ -45,7 +43,6 @@ exports.blurOffensiveImages = (event) => {
   console.log(`Analyzing ${file.name}.`);
 
   client.safeSearchDetection(file).then(response => {
-  //client.safeSearchDetection('gs://hn-image-bucket/image3.jpg').then(response => {
 	const detections = response[0].safeSearchAnnotation;
 	console.log(`Adult: ${detections.adult}`);
     	console.log(`Spoof: ${detections.spoof}`);
